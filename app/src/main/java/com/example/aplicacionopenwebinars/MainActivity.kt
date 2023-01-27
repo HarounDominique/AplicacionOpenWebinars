@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,21 +20,36 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            StudentList()
+            MainScreen()
         }
     }
 }
 
 @Composable
-fun StudentList(){
-    val students = remember{mutableStateListOf("Paco", "Manolo")}
-    Column(modifier = Modifier.fillMaxWidth()){
-        for(student in students){
-            Text(text = student)
+fun MainScreen() {
+    val nameState = remember { mutableStateOf("") }
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color.LightGray
+    ) {
+        MainLayout(
+            name = nameState.value
+        ){
+            newName -> nameState.value = newName
         }
-        Button(onClick = {students.add("Pepe")}){
+    }
+}
 
-        }
+@Composable
+fun MainLayout(
+    name: String,
+    onTextFieldChange: (String) -> Unit
+) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        TextField(value = name, onValueChange = onTextFieldChange)
+        Text(
+            text = name
+        )
     }
 }
 
@@ -44,6 +57,6 @@ fun StudentList(){
 @Composable
 fun DefaultPreview() {
     AplicacionOpenWebinarsTheme {
-        StudentList()
+        MainScreen()
     }
 }
