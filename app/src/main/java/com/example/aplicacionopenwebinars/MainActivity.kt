@@ -40,34 +40,6 @@ fun StudentList(){
     }
 }
 
-@Composable
-fun MainScreen() {
-    Surface(
-        //modifier = Modifier.fillMaxSize(),
-        color = Color.LightGray
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            MySquare(miColor = Color.Black, tamanho = 80)
-            MySquare(miColor = Color.Green, tamanho = 180)
-
-        }
-    }
-}
-
-
-@Composable
-fun MySquare(miColor: Color, tamanho: Int) {
-    Surface(
-        color = miColor,
-        modifier = Modifier.size(tamanho.dp)
-    ) {
-
-    }
-}
-
 @Preview(showSystemUi = true)
 @Composable
 fun DefaultPreview() {
